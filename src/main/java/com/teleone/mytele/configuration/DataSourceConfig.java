@@ -21,18 +21,13 @@ public class DataSourceConfig {
         config.setJdbcUrl("jdbc:postgresql://localhost:5432/postgres");
         config.setDriverClassName("org.postgresql.Driver");
         config.setUsername("postgres");
-        config.setPassword("pass");
+        config.setPassword("12345");
         config.addDataSourceProperty("serverName", "localhost");
         config.addDataSourceProperty("port", "5432");
         config.addDataSourceProperty("databaseName", "postgres");
         config.setPoolName("springHikariCP");
 
         return new HikariDataSource(config);
-    }
-
-    @Bean
-    public JdbcTemplate LocationDAOImpl(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
     }
 
     /**
