@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,10 +17,10 @@ public class UserController {
 
     @Autowired private UserDao userDao;
 
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
-    public ResponseEntity<User> getUser(@PathVariable String username) {
-        if (userDao.userExists(username)) {
-            return new ResponseEntity<>(userDao.getUserByUsername(username), HttpStatus.OK);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<User> getUser(@PathVariable int id) {
+        if (userDao.userExists(id)) {
+            return new ResponseEntity<>(userDao.getUserById(id), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -27,11 +28,12 @@ public class UserController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     //todo: ask - use ResponseEntity<String> when in effect using void?
-    public ResponseEntity<String> createUser(@PathVariable String username) {
+    public ResponseEntity<String> createUser(@RequestBody String username, @RequestBody String password) {
         if (userDao.userExists(username)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
-            User user = new User(username);
+            final User user = new User(username);
+            user.setPassword(password);
             userDao.createUser(user);
             return new ResponseEntity<>(HttpStatus.OK);
         }
