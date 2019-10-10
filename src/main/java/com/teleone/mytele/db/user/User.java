@@ -2,6 +2,7 @@ package com.teleone.mytele.db.user;
 
 import java.io.Serializable;
 
+@SuppressWarnings("WeakerAccess")
 public class User implements Serializable {
     private int id;
     private String username;

@@ -13,13 +13,13 @@ public class UserDao {
     private UserMapper userMapper = new UserMapper();
 
     public User getUserById(int id) {
-        String SQL_GET = "SELECT * FROM users_t WHERE id = ?";
+        final String SQL_GET = "SELECT * FROM users_t WHERE id = ?";
         return jdbcTemplate.queryForObject(SQL_GET, new Object[]{id}, userMapper);
     }
 
     public boolean userExists(String username) {
         //todo: ask, is it better to "cast" via queryForObject, or to check if result > 0?
-        String SQL_USER_EXISTS = "select count(*) from users_t where username = ?";
+        final String SQL_USER_EXISTS = "SELECT COUNT (*) FROM users_t WHERE username = ?";
         Boolean result = jdbcTemplate.queryForObject(SQL_USER_EXISTS, new Object[]{username}, Boolean.class);
         if (result == null) {
             return false;
@@ -29,7 +29,7 @@ public class UserDao {
 
     public boolean userExists(int id) {
         //todo: ask, is it better to "cast" via queryForObject, or to check if result > 0?
-        String SQL_USER_EXISTS = "select count(*) from users_t where id = ?";
+        final String SQL_USER_EXISTS = "SELECT COUNT(*) FROM users_t WHERE id = ?";
         Boolean result = jdbcTemplate.queryForObject(SQL_USER_EXISTS, new Object[]{id}, Boolean.class);
         if (result == null) {
             return false;
@@ -38,7 +38,7 @@ public class UserDao {
     }
 
     public void createUser(User user) {
-        String SQL_INSERT_USER = "insert into users_t values(?)";
-        jdbcTemplate.update(SQL_INSERT_USER, user.getUsername());
+        final String SQL_INSERT_USER = "INSERT INTO users_t VALUES(?, ?)";
+        jdbcTemplate.update(SQL_INSERT_USER, user.getUsername(), user.getPassword());
     }
 }
