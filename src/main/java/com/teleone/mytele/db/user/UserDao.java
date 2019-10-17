@@ -10,7 +10,8 @@ public class UserDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private UserMapper userMapper = new UserMapper();
+    @Autowired
+    private UserMapper userMapper;
 
     public User getUserById(int id) {
         final String SQL_GET = "SELECT * FROM users_t WHERE id = ?";
