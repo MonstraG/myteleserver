@@ -1,7 +1,7 @@
 package com.teleone.mytele.controllers;
 
 import com.teleone.mytele.db.user.User;
-import com.teleone.mytele.db.user.UserDao;
+import com.teleone.mytele.db.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/users/*")
 public class UserController {
 
-    @Autowired private UserDao userDao;
+    @Autowired UserRepository repository;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(@PathVariable int id) {
-        if (userDao.userExists(id)) {
-            return new ResponseEntity<>(userDao.getUserById(id), HttpStatus.OK);
+        if (repository.existsById(id)) {
+            return new ResponseEntity<>(repository.findById(id), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -29,12 +29,12 @@ public class UserController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     //todo: ask - use ResponseEntity<String> when in effect using void?
     public ResponseEntity<String> createUser(@RequestBody String username, @RequestBody String password) {
-        if (userDao.userExists(username)) {
+        if (repository.existsByUsername(username)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             final User user = new User(username);
             user.setPassword(password);
-            userDao.createUser(user);
+            repository.save(user);
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
