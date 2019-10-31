@@ -12,7 +12,7 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     ResponseEntity<String> home() {
-        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
+        return new ResponseEntity<>("Hello world!", HttpStatus.OK);
     }
 
 }
