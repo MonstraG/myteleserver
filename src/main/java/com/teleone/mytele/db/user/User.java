@@ -15,8 +15,8 @@ public class User {
     private String username;
     private String password;
 
-    @ManyToMany
-    private Set<Role> roles;
+    @ManyToOne
+    private Role role;
 
     User() { }
 
@@ -52,11 +52,11 @@ public class User {
         this.id = id;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Role role) {
+        this.role = role;
     }
 }
