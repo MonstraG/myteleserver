@@ -1,9 +1,9 @@
 package com.teleone.mytele.db.tickets;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.teleone.mytele.db.messages.Message;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Ticket {
@@ -13,6 +13,9 @@ public class Ticket {
     private Long author;
     private Long moderator;
     private Boolean open;
+
+    @OneToMany(mappedBy = "id")
+    private Set<Message> messageSet;
 
     Ticket() { }
 

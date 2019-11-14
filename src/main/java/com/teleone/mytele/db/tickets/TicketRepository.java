@@ -2,7 +2,6 @@ package com.teleone.mytele.db.tickets;
 
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public interface TicketRepository extends CrudRepository<Ticket, Long> {
@@ -14,8 +13,4 @@ public interface TicketRepository extends CrudRepository<Ticket, Long> {
 
     Set<Ticket> findByAuthor(long id);
 
-    //todo:
-    // messages service
-    // with:
-    //  all messages by ticket
 }

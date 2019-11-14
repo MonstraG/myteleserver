@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -36,6 +38,16 @@ public class UserService {
 
     public boolean exists(Long id) {
         return userRepository.existsById(id);
+    }
+
+    public Set<User> getUsers() {
+        HashSet<User> set = new HashSet<>();
+        userRepository.findAll().forEach(set::add);
+        return set;
+    }
+
+    public Long getUsersCount() {
+        return userRepository.count();
     }
 
 }
