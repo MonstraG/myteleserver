@@ -3,7 +3,6 @@ package com.teleone.mytele.db.user;
 import com.teleone.mytele.db.role.Role;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "myapp")
@@ -59,4 +58,6 @@ public class User {
     public void setRoles(Role role) {
         this.role = role;
     }
+
+    //todo: add insertTimestamp field
 }

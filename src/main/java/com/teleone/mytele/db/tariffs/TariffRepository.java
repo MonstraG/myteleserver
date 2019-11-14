@@ -1,4 +1,4 @@
-package com.teleone.mytele.db.tarifs;
+package com.teleone.mytele.db.tariffs;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TariffRepository extends CrudRepository<Tariff, Long> {
@@ -11,4 +11,7 @@ public interface TariffRepository extends CrudRepository<Tariff, Long> {
     boolean existsByName(String string);
 
     boolean existsByIdOrName(long id, String name);
+
+    //todo:
+    // 1. total amount of them
 }

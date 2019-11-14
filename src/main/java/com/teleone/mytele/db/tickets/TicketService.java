@@ -1,6 +1,5 @@
 package com.teleone.mytele.db.tickets;
 
-import com.teleone.mytele.db.tarifs.TariffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +17,8 @@ public class TicketService {
     public boolean exists(Long id) {
         return ticketRepository.existsById(id);
     }
+
+    //todo:
+    // add creation with check that User has role user
+    // add assignModerator method with check that user has role moderator
 }

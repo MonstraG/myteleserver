@@ -4,7 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class AdditionalService {
+public class AdditionalServices {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -12,12 +12,12 @@ public class AdditionalService {
     private int price;
     private String desc;
 
-    AdditionalService() { }
-    public AdditionalService(Long id) {
+    AdditionalServices() { }
+    public AdditionalServices(Long id) {
         this.id = id;
     }
 
-    public AdditionalService(String name) {
+    public AdditionalServices(String name) {
         this.name = name;
     }
 
@@ -44,4 +44,7 @@ public class AdditionalService {
     public String getDesc() { return desc; }
 
     public void setDesc(String desc) { this.desc = desc; }
+
+    //todo:
+    // add deletion and creation with check that User has role moderator or admin
 }

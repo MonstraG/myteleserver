@@ -7,11 +7,11 @@ import java.util.Optional;
 @Service
 public class AdditionalServicesService {
     @Autowired
-    private AdditionalServiceRepository serviceRepository;
+    private AdditionalServicesRepository serviceRepository;
 
-    public AdditionalService find(String name) { return serviceRepository.findByName(name); }
+    public AdditionalServices find(String name) { return serviceRepository.findByName(name); }
 
-    public Optional<AdditionalService> find(Long id) {
+    public Optional<AdditionalServices> find(Long id) {
         return serviceRepository.findById(id);
     }
 

@@ -1,4 +1,4 @@
-package com.teleone.mytele.db.tarifs;
+package com.teleone.mytele.db.tariffs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,4 +23,7 @@ public class TariffsService {
     public boolean exists(Long id) {
         return tariffRepository.existsById(id);
     }
+
+    //todo:
+    // add deletion and creation with check that User has role moderator or admin
 }

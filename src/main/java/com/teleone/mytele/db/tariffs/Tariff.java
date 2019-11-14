@@ -1,4 +1,4 @@
-package com.teleone.mytele.db.tarifs;
+package com.teleone.mytele.db.tariffs;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,9 +9,11 @@ public class Tariff {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private int price;
-    private int priceForConnection;
+
+    private int monthlyCharge;
+    private int connectionCharge;
     private int minutes;
+
     private int sms;
     private int internet;
 
@@ -40,13 +42,13 @@ public class Tariff {
         this.id = id;
     }
 
-    public int getPrice() { return price; }
+    public int getMonthlyCharge() { return monthlyCharge; }
 
-    public void setPrice(int price) { this.price = price; }
+    public void setMonthlyCharge(int monthlyCharge) { this.monthlyCharge = monthlyCharge; }
 
-    public int getPriceForConnection() { return priceForConnection; }
+    public int getConnectionCharge() { return connectionCharge; }
 
-    public void setPriceForConnection(int priceForConnection) { this.priceForConnection = priceForConnection; }
+    public void setConnectionCharge(int connectionCharge) { this.connectionCharge = connectionCharge; }
 
     public int getMinutes() { return minutes; }
 

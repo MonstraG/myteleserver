@@ -13,4 +13,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     boolean existsByUsername(String string);
 
     boolean existsByIdOrUsername(long id, String username);
+
+    //todo: total amount of users
 }
