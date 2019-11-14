@@ -12,6 +12,4 @@ public interface TariffRepository extends CrudRepository<Tariff, Long> {
 
     boolean existsByIdOrName(long id, String name);
 
-    //todo:
-    // 1. total amount of them
 }

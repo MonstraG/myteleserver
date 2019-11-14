@@ -12,7 +12,4 @@ public interface AdditionalServicesRepository extends CrudRepository<AdditionalS
     boolean existsByName(String string);
 
     boolean existsByIdOrName(long id, String name);
-
-    //todo:
-    // 1. total amount of them
 }

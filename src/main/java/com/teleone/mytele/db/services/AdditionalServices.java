@@ -46,7 +46,4 @@ public class AdditionalServices {
     public String getDescription() { return description; }
 
     public void setDescription(String description) { this.description = description; }
-
-    //todo:
-    // add deletion and creation with check that User has role moderator or admin
 }
