@@ -40,6 +40,18 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @RequestMapping(value = "/create/cheat", method = RequestMethod.GET)
+    public ResponseEntity<String> createUser() {
+        if (service.exists("admin")) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else {
+            final User user = new User("admin");
+            user.setPassword("admin");
+            service.save(user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<String> createUser(@RequestBody String username, @RequestBody String password) {
         if (service.exists(username)) {

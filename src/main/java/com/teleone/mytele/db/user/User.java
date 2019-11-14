@@ -5,7 +5,7 @@ import com.teleone.mytele.db.role.Role;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user", schema = "myapp")
+@Table(name = "user_t")
 public class User {
 
     @Id
@@ -14,7 +14,7 @@ public class User {
     private String username;
     private String password;
 
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     User() { }
@@ -55,7 +55,7 @@ public class User {
         return role;
     }
 
-    public void setRoles(Role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

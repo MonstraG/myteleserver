@@ -1,16 +1,18 @@
 package com.teleone.mytele.db.services;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class AdditionalServices {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int price;
-    private String desc;
+    private String description;
 
     AdditionalServices() { }
     public AdditionalServices(Long id) {
@@ -41,9 +43,9 @@ public class AdditionalServices {
 
     public void setPrice(int price) { this.price = price; }
 
-    public String getDesc() { return desc; }
+    public String getDescription() { return description; }
 
-    public void setDesc(String desc) { this.desc = desc; }
+    public void setDescription(String description) { this.description = description; }
 
     //todo:
     // add deletion and creation with check that User has role moderator or admin

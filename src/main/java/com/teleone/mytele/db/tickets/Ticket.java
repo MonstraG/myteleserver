@@ -1,9 +1,11 @@
 package com.teleone.mytele.db.tickets;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,7 +14,8 @@ public class Ticket {
     private String moderator;
     private Boolean status;
 
-    Ticket() { };
+    Ticket() { }
+
     public Ticket(Long id) {
         this.id = id;
     }
