@@ -1,5 +1,6 @@
 package com.teleone.mytele.db.tariffs;
 
+import com.teleone.mytele.db.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,31 @@ public class TariffsService {
         return tariffRepository.existsById(id);
     }
 
-    //todo:
-    // add deletion and creation with check that User has role moderator or admin
+    public boolean remove(Long id, User user) {
+        if (user.getRole().name() == "MOD" || user.getRole().name() == "ADMIN") {
+            tariffRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean create(Tariff tariff, User user) {
+        if (user.getRole().name() == "MOD" || user.getRole().name() == "ADMIN") {
+            if (!tariffRepository.existsByName(tariff.getName())) {
+                tariffRepository.save(tariff);
+            }
+        }
+        return false;
+    }
+
+    public Long getTariffsCount() {
+        return tariffRepository.count();
+    }
+
+    public Set<Tariff> getTickets() {
+        HashSet<Tariff> set = new HashSet<>();
+        tariffRepository.findAll().forEach(set::add);
+        return set;
+    }
+
 }
