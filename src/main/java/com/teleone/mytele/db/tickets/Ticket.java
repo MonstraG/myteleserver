@@ -10,9 +10,9 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String author;
-    private String moderator;
-    private Boolean status;
+    private Long author;
+    private Long moderator;
+    private Boolean open;
 
     Ticket() { }
 
@@ -28,15 +28,15 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getAuthor() { return author; }
+    public Long getAuthor() { return author; }
 
-    public void setAuthor(String author) { this.author = author; }
+    public void setAuthor(Long author) { this.author = author; }
 
-    public String getModerator() { return moderator; }
+    public Long getModerator() { return moderator; }
 
-    public void setModerator(String moderator) { this.moderator = moderator; }
+    public void setModerator(Long moderator) { this.moderator = moderator; }
 
-    public Boolean getStatus() {return status; }
+    public Boolean getOpen() {return open; }
 
-    public void setStatus(Boolean status) { this.status = status; }
+    public void setOpen(Boolean open) { this.open = open; }
 }
