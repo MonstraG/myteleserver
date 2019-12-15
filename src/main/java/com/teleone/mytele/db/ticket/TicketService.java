@@ -1,4 +1,4 @@
-package com.teleone.mytele.db.tickets;
+package com.teleone.mytele.db.ticket;
 
 import com.teleone.mytele.db.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class TicketService {
     public boolean closeTicket(Long id) {
         Optional<Ticket> ticket = find(id);
         if (ticket.isPresent()) {
-            ticket.get().setOpen(false);
+            ticket.get().setOpenStatus(false);
             return true;
         }
         return false;
@@ -33,24 +33,24 @@ public class TicketService {
     public boolean openTicket(Long id) {
         Optional<Ticket> ticket = find(id);
         if (ticket.isPresent()) {
-            ticket.get().setOpen(true);
+            ticket.get().setOpenStatus(true);
             return true;
         }
         return false;
     }
 
     public boolean create(Ticket ticket, User user) {
-        if (user.getRole().name() == "USER") {
-                ticketRepository.save(ticket);
-                return true;
+        if (user.getRole().name().equals("USER")) {
+            ticketRepository.save(ticket);
+            return true;
         }
         return false;
     }
 
-    public boolean assignModerator(Long id, Long moderator, User user) {
+    public boolean assignModerator(Long id, User moderator) {
         Optional<Ticket> ticket = find(id);
-        if (ticket.isPresent() && (user.getRole().name().equals("MOD") || user.getRole().name().equals("ADMIN"))) {
-            ticket.get().setModerator(moderator);
+        if (ticket.isPresent() && (moderator.getRole().name().equals("MOD") || moderator.getRole().name().equals("ADMIN"))) {
+            ticket.get().setModerator(moderator.getId());
         }
         return false;
     }

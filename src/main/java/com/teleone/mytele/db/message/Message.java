@@ -1,6 +1,6 @@
-package com.teleone.mytele.db.messages;
+package com.teleone.mytele.db.message;
 
-import com.teleone.mytele.db.tickets.Ticket;
+import com.teleone.mytele.db.ticket.Ticket;
 
 import javax.persistence.*;
 
@@ -15,7 +15,8 @@ public class Message {
     @ManyToOne
     private Ticket ticket;
 
-    Message() {};
+    Message() {
+    }
 
     public Long getId() {
         return id;

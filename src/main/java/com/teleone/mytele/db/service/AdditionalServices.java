@@ -1,4 +1,4 @@
-package com.teleone.mytele.db.services;
+package com.teleone.mytele.db.service;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,9 @@ public class AdditionalServices {
     private int price;
     private String description;
 
-    AdditionalServices() { }
+    AdditionalServices() {
+    }
+
     public AdditionalServices(Long id) {
         this.id = id;
     }
@@ -39,11 +41,19 @@ public class AdditionalServices {
         this.id = id;
     }
 
-    public int getPrice() { return price; }
+    public int getPrice() {
+        return price;
+    }
 
-    public void setPrice(int price) { this.price = price; }
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

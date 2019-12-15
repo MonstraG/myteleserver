@@ -1,4 +1,4 @@
-package com.teleone.mytele.db.tickets;
+package com.teleone.mytele.db.ticket;
 
 import org.springframework.data.repository.CrudRepository;
 

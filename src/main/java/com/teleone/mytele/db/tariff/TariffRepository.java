@@ -1,4 +1,5 @@
-package com.teleone.mytele.db.tariffs;
+package com.teleone.mytele.db.tariff;
+
 import org.springframework.data.repository.CrudRepository;
 
 public interface TariffRepository extends CrudRepository<Tariff, Long> {

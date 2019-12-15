@@ -1,4 +1,4 @@
-package com.teleone.mytele.db.services;
+package com.teleone.mytele.db.service;
 
 import com.teleone.mytele.db.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,9 @@ public class AdditionalServicesService {
     @Autowired
     private AdditionalServicesRepository additionalServicesRepository;
 
-    public AdditionalServices find(String name) { return additionalServicesRepository.findByName(name); }
+    public AdditionalServices find(String name) {
+        return additionalServicesRepository.findByName(name);
+    }
 
     public Optional<AdditionalServices> find(Long id) {
         return additionalServicesRepository.findById(id);
@@ -29,7 +31,7 @@ public class AdditionalServicesService {
     }
 
     public boolean remove(Long id, User user) {
-        if (user.getRole().name() == "MOD" || user.getRole().name() == "ADMIN") {
+        if (user.getRole().name().equals("MOD") || user.getRole().name().equals("ADMIN")) {
             additionalServicesRepository.deleteById(id);
             return true;
         }
@@ -37,7 +39,7 @@ public class AdditionalServicesService {
     }
 
     public boolean create(AdditionalServices additionalServices, User user) {
-        if (user.getRole().name() == "MOD" || user.getRole().name() == "ADMIN") {
+        if (user.getRole().name().equals("MOD") || user.getRole().name().equals("ADMIN")) {
             if (!this.additionalServicesRepository.existsByName(additionalServices.getName())) {
                 this.additionalServicesRepository.save(additionalServices);
             }
@@ -50,5 +52,10 @@ public class AdditionalServicesService {
         additionalServicesRepository.findAll().forEach(set::add);
         return set;
     }
+
+    public Long getAdditionalServicesCount() {
+        return additionalServicesRepository.count();
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package com.teleone.mytele.db.tariffs;
+package com.teleone.mytele.db.tariff;
 
 import com.teleone.mytele.db.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,9 @@ public class TariffsService {
     @Autowired
     private TariffRepository tariffRepository;
 
-    public Tariff find(String name) { return tariffRepository.findByName(name); }
+    public Tariff find(String name) {
+        return tariffRepository.findByName(name);
+    }
 
     public Optional<Tariff> find(Long id) {
         return tariffRepository.findById(id);

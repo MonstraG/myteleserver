@@ -1,4 +1,4 @@
-package com.teleone.mytele.db.services;
+package com.teleone.mytele.db.service;
 
 import org.springframework.data.repository.CrudRepository;
 
