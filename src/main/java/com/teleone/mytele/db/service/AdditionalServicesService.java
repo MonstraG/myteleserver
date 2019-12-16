@@ -34,7 +34,7 @@ public class AdditionalServicesService {
         return true;
     }
 
-    public boolean create(AdditionalService additionalServices) {
+    public static boolean create(AdditionalService additionalServices) {
         if (this.additionalServicesRepository.existsByName(additionalServices.getName())) {
             return false;
         }

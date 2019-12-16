@@ -22,6 +22,15 @@ public class Tariff {
     Tariff() {
     }
 
+    public Tariff(String name, int monthlyCharge, int connectionCharge, int minutes, int sms, int internet) {
+        this.name = name;
+        this.monthlyCharge = monthlyCharge;
+        this.connectionCharge = connectionCharge;
+        this.minutes = minutes;
+        this.sms = sms;
+        this.internet = internet;
+    }
+
     public Tariff(Long id) {
         this.id = id;
     }
