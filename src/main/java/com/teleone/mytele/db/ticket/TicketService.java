@@ -40,7 +40,7 @@ public class TicketService {
     }
 
     public boolean create(Ticket ticket, User user) {
-        if (user.getRole().name().equals("USER")) {
+        if (!user.isEmployee()) {
             ticketRepository.save(ticket);
             return true;
         }
@@ -49,7 +49,7 @@ public class TicketService {
 
     public boolean assignModerator(Long id, User moderator) {
         Optional<Ticket> ticket = find(id);
-        if (ticket.isPresent() && (moderator.getRole().name().equals("MOD") || moderator.getRole().name().equals("ADMIN"))) {
+        if (ticket.isPresent() && (moderator.isEmployee())) {
             ticket.get().setModerator(moderator.getId());
         }
         return false;

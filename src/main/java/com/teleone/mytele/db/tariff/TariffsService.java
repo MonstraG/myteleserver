@@ -10,6 +10,7 @@ import java.util.Set;
 
 @Service
 public class TariffsService {
+
     @Autowired
     private TariffRepository tariffRepository;
 
@@ -30,7 +31,7 @@ public class TariffsService {
     }
 
     public boolean remove(Long id, User user) {
-        if (user.getRole().name() == "MOD" || user.getRole().name() == "ADMIN") {
+        if (user.isEmployee()) {
             tariffRepository.deleteById(id);
             return true;
         }
@@ -38,7 +39,7 @@ public class TariffsService {
     }
 
     public boolean create(Tariff tariff, User user) {
-        if (user.getRole().name() == "MOD" || user.getRole().name() == "ADMIN") {
+        if (user.isEmployee()) {
             if (!tariffRepository.existsByName(tariff.getName())) {
                 tariffRepository.save(tariff);
             }

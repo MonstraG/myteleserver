@@ -31,7 +31,7 @@ public class AdditionalServicesService {
     }
 
     public boolean remove(Long id, User user) {
-        if (user.getRole().name().equals("MOD") || user.getRole().name().equals("ADMIN")) {
+        if (user.isEmployee()) {
             additionalServicesRepository.deleteById(id);
             return true;
         }
@@ -39,7 +39,7 @@ public class AdditionalServicesService {
     }
 
     public boolean create(AdditionalServices additionalServices, User user) {
-        if (user.getRole().name().equals("MOD") || user.getRole().name().equals("ADMIN")) {
+        if (user.isEmployee()) {
             if (!this.additionalServicesRepository.existsByName(additionalServices.getName())) {
                 this.additionalServicesRepository.save(additionalServices);
             }

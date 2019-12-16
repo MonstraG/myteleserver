@@ -16,19 +16,19 @@ import java.util.HashMap;
 public class HomeController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    TicketService ticketService;
+    private TicketService ticketService;
 
     @Autowired
-    TariffsService tariffsService;
+    private TariffsService tariffsService;
 
     @Autowired
-    MessageService messagesService;
+    private MessageService messagesService;
 
     @Autowired
-    AdditionalServicesService additionalServicesService;
+    private AdditionalServicesService additionalServicesService;
 
     @RequestMapping("/")
     public String what() {
@@ -44,7 +44,6 @@ public class HomeController {
         response.put("additionalServices", additionalServicesService.getAdditionalServicesCount());
         response.put("messages", messagesService.getMessagesCount());
         response.put("tariffs", tariffsService.getTariffsCount());
-
 
         return response;
     }

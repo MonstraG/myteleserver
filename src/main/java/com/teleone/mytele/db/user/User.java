@@ -59,4 +59,8 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public boolean isEmployee() {
+        return this.getRole().name().equals("MOD") || this.getRole().name().equals("ADMIN");
+    }
 }

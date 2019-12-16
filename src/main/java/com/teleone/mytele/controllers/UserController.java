@@ -20,10 +20,10 @@ import java.util.Set;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    TicketService ticketService;
+    private TicketService ticketService;
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
