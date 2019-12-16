@@ -38,7 +38,7 @@ public class TariffService {
         return false;
     }
 
-    public static boolean create(Tariff tariff) {
+    public boolean create(Tariff tariff) {
         if (tariffRepository.existsByName(tariff.getName())) {
             return false;
         }
