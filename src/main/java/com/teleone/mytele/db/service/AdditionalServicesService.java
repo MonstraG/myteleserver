@@ -1,6 +1,5 @@
 package com.teleone.mytele.db.service;
 
-import com.teleone.mytele.db.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +13,11 @@ public class AdditionalServicesService {
     @Autowired
     private AdditionalServicesRepository additionalServicesRepository;
 
-    public AdditionalServices find(String name) {
+    public AdditionalService find(String name) {
         return additionalServicesRepository.findByName(name);
     }
 
-    public Optional<AdditionalServices> find(Long id) {
+    public Optional<AdditionalService> find(Long id) {
         return additionalServicesRepository.findById(id);
     }
 
@@ -30,20 +29,12 @@ public class AdditionalServicesService {
         return additionalServicesRepository.existsById(id);
     }
 
-    public boolean remove(Long id, User user) {
-        if (!user.isEmployee()) {
-            return false;
-        }
-
+    public boolean remove(Long id) {
         additionalServicesRepository.deleteById(id);
         return true;
     }
 
-    public boolean create(AdditionalServices additionalServices, User user) {
-        if (!user.isEmployee()) {
-            return false;
-        }
-
+    public boolean create(AdditionalService additionalServices) {
         if (this.additionalServicesRepository.existsByName(additionalServices.getName())) {
             return false;
         }
@@ -52,8 +43,8 @@ public class AdditionalServicesService {
         return true;
     }
 
-    public Set<AdditionalServices> getAdditionalServices() {
-        HashSet<AdditionalServices> set = new HashSet<>();
+    public Set<AdditionalService> getAdditionalServices() {
+        HashSet<AdditionalService> set = new HashSet<>();
         additionalServicesRepository.findAll().forEach(set::add);
         return set;
     }

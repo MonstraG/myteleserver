@@ -2,7 +2,7 @@ package com.teleone.mytele.controllers;
 
 import com.teleone.mytele.db.message.MessageService;
 import com.teleone.mytele.db.service.AdditionalServicesService;
-import com.teleone.mytele.db.tariff.TariffsService;
+import com.teleone.mytele.db.tariff.TariffService;
 import com.teleone.mytele.db.ticket.TicketService;
 import com.teleone.mytele.db.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class HomeController {
     private TicketService ticketService;
 
     @Autowired
-    private TariffsService tariffsService;
+    private TariffService tariffsService;
 
     @Autowired
     private MessageService messagesService;

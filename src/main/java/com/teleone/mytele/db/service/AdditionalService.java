@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class AdditionalServices {
+public class AdditionalService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,14 +14,14 @@ public class AdditionalServices {
     private int price;
     private String description;
 
-    AdditionalServices() {
+    AdditionalService() {
     }
 
-    public AdditionalServices(Long id) {
+    public AdditionalService(Long id) {
         this.id = id;
     }
 
-    public AdditionalServices(String name) {
+    public AdditionalService(String name) {
         this.name = name;
     }
 

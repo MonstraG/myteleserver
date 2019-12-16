@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class TariffsService {
+public class TariffService {
 
     @Autowired
     private TariffRepository tariffRepository;

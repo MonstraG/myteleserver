@@ -2,10 +2,10 @@ package com.teleone.mytele.db.service;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface AdditionalServicesRepository extends CrudRepository<AdditionalServices, Long> {
-    AdditionalServices findById(long id);
+public interface AdditionalServicesRepository extends CrudRepository<AdditionalService, Long> {
+    AdditionalService findById(long id);
 
-    AdditionalServices findByName(String name);
+    AdditionalService findByName(String name);
 
     boolean existsById(long id);
 
