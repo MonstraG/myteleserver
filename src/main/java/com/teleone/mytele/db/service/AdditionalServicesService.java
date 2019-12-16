@@ -31,23 +31,28 @@ public class AdditionalServicesService {
     }
 
     public boolean remove(Long id, User user) {
-        if (user.isEmployee()) {
-            additionalServicesRepository.deleteById(id);
-            return true;
+        if (!user.isEmployee()) {
+            return false;
         }
-        return false;
+
+        additionalServicesRepository.deleteById(id);
+        return true;
     }
 
     public boolean create(AdditionalServices additionalServices, User user) {
-        if (user.isEmployee()) {
-            if (!this.additionalServicesRepository.existsByName(additionalServices.getName())) {
-                this.additionalServicesRepository.save(additionalServices);
-            }
+        if (!user.isEmployee()) {
+            return false;
         }
-        return false;
+
+        if (this.additionalServicesRepository.existsByName(additionalServices.getName())) {
+            return false;
+        }
+
+        this.additionalServicesRepository.save(additionalServices);
+        return true;
     }
 
-    public Set<AdditionalServices> getTickets() {
+    public Set<AdditionalServices> getAdditionalServices() {
         HashSet<AdditionalServices> set = new HashSet<>();
         additionalServicesRepository.findAll().forEach(set::add);
         return set;

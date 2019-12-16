@@ -13,7 +13,7 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
-    public Optional<Ticket> find(Long id) {
+    private Optional<Ticket> find(Long id) {
         return ticketRepository.findById(id);
     }
 
@@ -21,11 +21,16 @@ public class TicketService {
         return ticketRepository.existsById(id);
     }
 
+    private boolean save(Ticket ticket) {
+        ticketRepository.save(ticket);
+        return true;
+    }
+
     public boolean closeTicket(Long id) {
         Optional<Ticket> ticket = find(id);
         if (ticket.isPresent()) {
             ticket.get().setOpenStatus(false);
-            return true;
+            return save(ticket.get());
         }
         return false;
     }
@@ -34,15 +39,14 @@ public class TicketService {
         Optional<Ticket> ticket = find(id);
         if (ticket.isPresent()) {
             ticket.get().setOpenStatus(true);
-            return true;
+            return save(ticket.get());
         }
         return false;
     }
 
     public boolean create(Ticket ticket, User user) {
         if (!user.isEmployee()) {
-            ticketRepository.save(ticket);
-            return true;
+            return save(ticket);
         }
         return false;
     }
@@ -51,6 +55,7 @@ public class TicketService {
         Optional<Ticket> ticket = find(id);
         if (ticket.isPresent() && (moderator.isEmployee())) {
             ticket.get().setModerator(moderator.getId());
+            return save(ticket.get());
         }
         return false;
     }

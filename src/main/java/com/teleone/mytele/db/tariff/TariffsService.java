@@ -39,19 +39,23 @@ public class TariffsService {
     }
 
     public boolean create(Tariff tariff, User user) {
-        if (user.isEmployee()) {
-            if (!tariffRepository.existsByName(tariff.getName())) {
-                tariffRepository.save(tariff);
-            }
+        if (!user.isEmployee()) {
+            return false;
         }
-        return false;
+
+        if (tariffRepository.existsByName(tariff.getName())) {
+            return false;
+        }
+
+        tariffRepository.save(tariff);
+        return true;
     }
 
     public Long getTariffsCount() {
         return tariffRepository.count();
     }
 
-    public Set<Tariff> getTickets() {
+    public Set<Tariff> getTariffs() {
         HashSet<Tariff> set = new HashSet<>();
         tariffRepository.findAll().forEach(set::add);
         return set;
