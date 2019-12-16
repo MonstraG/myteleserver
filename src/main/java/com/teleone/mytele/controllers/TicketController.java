@@ -26,8 +26,15 @@ public class TicketController extends AbstractController {
     @Autowired
     UserService userService;
 
+    @RequestMapping(value = "/{ticketId}", method = RequestMethod.GET)
+    public ResponseEntity<Ticket> getTickets(@PathVariable Long ticketId) {
+        return ticketService.find(ticketId)
+                .map(ticket -> new ResponseEntity<>(ticket, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<String> closeTicket(@PathVariable Long userId, @RequestBody Message initialMessage) {
+    public ResponseEntity<String> createTicket(@PathVariable Long userId, @RequestBody Message initialMessage) {
         Optional<User> user = userService.find(userId);
         if (!user.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -42,18 +49,14 @@ public class TicketController extends AbstractController {
     }
 
     @RequestMapping(value = "/{ticketId}/assign", method = RequestMethod.POST)
-    public ResponseEntity<String> getTickets(@PathVariable Long ticketId, @RequestBody Long moderatorId) {
+    public ResponseEntity<String> assignTicket(@PathVariable Long ticketId, @RequestBody Long moderatorId) {
         if (!ticketService.exists(ticketId)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        Optional<User> user = userService.find(moderatorId);
-        if (!user.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        User moderator = user.get();
-        return booleanResponse(ticketService.assignModerator(ticketId, moderator));
+        return userService.find(moderatorId)
+                .map(moderator -> booleanResponse(ticketService.assignModerator(ticketId, moderator)))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(value = "/{ticketId}/close", method = RequestMethod.GET)

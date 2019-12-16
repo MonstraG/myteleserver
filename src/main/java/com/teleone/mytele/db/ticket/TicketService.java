@@ -13,7 +13,7 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
-    private Optional<Ticket> find(Long id) {
+    public Optional<Ticket> find(Long id) {
         return ticketRepository.findById(id);
     }
 

@@ -30,19 +30,15 @@ public class TariffsService {
         return tariffRepository.existsById(id);
     }
 
-    public boolean remove(Long id, User user) {
-        if (user.isEmployee()) {
+    public boolean remove(Long id) {
+        if (tariffRepository.existsById(id)) {
             tariffRepository.deleteById(id);
             return true;
         }
         return false;
     }
 
-    public boolean create(Tariff tariff, User user) {
-        if (!user.isEmployee()) {
-            return false;
-        }
-
+    public boolean create(Tariff tariff) {
         if (tariffRepository.existsByName(tariff.getName())) {
             return false;
         }

@@ -38,13 +38,9 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(@PathVariable Long id) {
-        if (userService.exists(id)) {
-            Optional<User> user = userService.find(id);
-            if (user.isPresent()) {
-                return new ResponseEntity<>(user.get(), HttpStatus.OK);
-            }
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return userService.find(id)
+                .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(value = "/create/cheat", method = RequestMethod.GET)
@@ -80,15 +76,10 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-
-    @RequestMapping(value = "/{userId}/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/{userId}/tickets", method = RequestMethod.GET)
     public ResponseEntity<Set<Ticket>> getTickets(@PathVariable Long userId) {
-        Optional<User> user = userService.find(userId);
-        if (user.isPresent()) {
-            Set<Ticket> result = ticketService.getTickets(user.get());
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return userService.find(userId)
+                .map(user -> new ResponseEntity<>(ticketService.getTickets(user), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
