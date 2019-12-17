@@ -17,9 +17,10 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void save(User user) {
+    public Long save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        return user.getId();
     }
 
     public User find(String username) {
@@ -50,5 +51,4 @@ public class UserService {
     public Long getUsersCount() {
         return userRepository.count();
     }
-
 }
