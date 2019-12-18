@@ -19,7 +19,7 @@ public class Tariff {
     private int sms;
     private int internet;
 
-    Tariff() {
+    public Tariff() {
     }
 
     public Tariff(String name, int monthlyCharge, int connectionCharge, int minutes, int sms, int internet) {

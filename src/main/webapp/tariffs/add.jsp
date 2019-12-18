@@ -8,9 +8,9 @@
 <body>
 <div class="container-fluid" style="height: 100vh; overflow: hidden">
   <div th:insert="~{nav::navbar}"></div>
-  <main class="row">
+  <main class="row" style="height: 100vh; width: 100vw">
     <div th:insert="~{nav::aside}"></div>
-    <div th:insert="~{content::home}"></div>
+    <div th:insert="~{add::addTariff}"></div>
   </main>
 </div>
 </body>

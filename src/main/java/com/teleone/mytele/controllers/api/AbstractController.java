@@ -1,4 +1,4 @@
-package com.teleone.mytele.controllers;
+package com.teleone.mytele.controllers.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

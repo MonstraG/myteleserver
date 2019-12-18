@@ -13,6 +13,6 @@ public class WebAppInit extends AbstractAnnotationConfigDispatcherServletInitial
     }
 
     protected String[] getServletMappings() {
-        return new String[]{"/*"};
+        return new String[]{"/**"};
     }
 }

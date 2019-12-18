@@ -14,7 +14,7 @@ public class AdditionalService {
     private int price;
     private String description;
 
-    AdditionalService() {
+    public AdditionalService() {
     }
 
     public AdditionalService(String name, int price, String description) {

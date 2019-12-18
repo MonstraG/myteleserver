@@ -1,4 +1,4 @@
-package com.teleone.mytele.controllers;
+package com.teleone.mytele.controllers.ui;
 
 import com.teleone.mytele.db.message.MessageService;
 import com.teleone.mytele.db.service.AdditionalServicesService;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 @Controller
 @RequestMapping("/*")
-public class WebController {
+public class HomeController {
 
     @Autowired
     private UserService userService;
@@ -35,7 +35,7 @@ public class WebController {
     @Autowired
     private AdditionalServicesService additionalServicesService;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String home(ModelMap model) {
         UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         HashMap<String, Long> stats = getStats();
@@ -44,7 +44,7 @@ public class WebController {
         return "home";
     }
 
-    @RequestMapping("/stats")
+    @GetMapping("/stats")
     public HashMap<String, Long> getStats() {
         HashMap<String, Long> response = new HashMap<>();
 

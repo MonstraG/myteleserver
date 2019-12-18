@@ -1,4 +1,4 @@
-package com.teleone.mytele.controllers;
+package com.teleone.mytele.controllers.api;
 
 import com.teleone.mytele.db.message.Message;
 import com.teleone.mytele.db.ticket.Ticket;

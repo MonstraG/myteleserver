@@ -1,4 +1,4 @@
-package com.teleone.mytele.controllers;
+package com.teleone.mytele.controllers.api;
 
 import com.teleone.mytele.db.service.AdditionalService;
 import com.teleone.mytele.db.service.AdditionalServicesService;
