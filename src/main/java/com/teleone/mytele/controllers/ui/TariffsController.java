@@ -31,8 +31,8 @@ public class TariffsController {
         return "/tariffs/list";
     }
 
-    @GetMapping("/addTariff")
-    public String addTariff(ModelMap model) {
+    @GetMapping("/add")
+    public String add(ModelMap model) {
         UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("userDetails", userDetails);
         model.addAttribute("tariff", new Tariff());
@@ -40,7 +40,7 @@ public class TariffsController {
     }
 
     @PostMapping("/create")
-    public String getAdditionalServices(ModelMap model, @ModelAttribute Tariff tariff) {
+    public String save(ModelMap model, @ModelAttribute Tariff tariff) {
         tariffsService.create(tariff);
         return tariffs(model);
     }

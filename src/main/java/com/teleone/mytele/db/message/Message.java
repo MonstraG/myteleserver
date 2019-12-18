@@ -15,7 +15,7 @@ public class Message {
     @ManyToOne
     private Ticket ticket;
 
-    Message() {
+    public Message() {
     }
 
     public Long getId() {

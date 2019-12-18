@@ -82,5 +82,35 @@
   </article>
 </div>
 
+<div th:fragment="ticketsTable">
+  <article class=".col-9" style="padding: 40px;">
+    <h4>Заявки</h4>
+    <h5 th:if=${!hasContent}>Заявок нет</h5>
+    <div th:if=${hasContent}>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Автор</th>
+          <th scope="col">Модератор</th>
+          <th scope="col">Статус</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="even pointer" th:each="row: ${tickets}" id="tablerow">
+          </th>
+          <td th:each="field: ${row}" th:text="${field.id}" />
+          <td th:each="field: ${row}" th:text="${field.author}" />
+          <td th:each="field: ${row}" th:text="${field.moderator}" />
+          <td th:each="field: ${row}" th:text="${field.open}" />
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a href="/tickets/add" th:if=${!userDetails.authorities.stream().findFirst().get().getAuthority().equals("USER")}><button class="btn btn-primary">Создать заявку</button></a>
+  </article>
+</div>
+
 </body>
 </html>

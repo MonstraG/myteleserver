@@ -54,5 +54,17 @@
     </div>
 </div>
 
+<div th:fragment="addTicket">
+    <div style="padding: 20px 40px;">
+        <form action="#" th:action="@{/tickets/create}" th:object="${message}" method="post">
+            <div class="form-group">
+                <label for="text">Текст заявки</label>
+                <textarea class="form-control" id="text" th:field="*{text}"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Создать</button>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>

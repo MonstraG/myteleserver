@@ -23,8 +23,8 @@
       <li><a href="/">Главная</a></li>
       <li><a href="/tariffs/list">Тарифы</a></li>
       <li><a href="/services/list">Доп. услуги</a></li>
-      <li><a href="/tickets">Заявки</a></li>
-      <li><a href="/users" th:if=${userDetails.authorities.stream().findFirst().get().getAuthority().equals("ADMIN")}>Пользователи</a></li>
+      <li><a href="/tickets/list">Заявки</a></li>
+      <li><a href="/users/list" th:if=${userDetails.authorities.stream().findFirst().get().getAuthority().equals("ADMIN")}>Пользователи</a></li>
     </ul>
   </aside>
 </div>

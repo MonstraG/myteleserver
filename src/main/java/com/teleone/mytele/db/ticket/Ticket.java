@@ -3,6 +3,7 @@ package com.teleone.mytele.db.ticket;
 import com.teleone.mytele.db.message.Message;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -57,6 +58,9 @@ public class Ticket {
     }
 
     public void addMessage(Message message) {
+        if (this.messageSet == null) {
+            this.messageSet = new HashSet<>();
+        }
         this.messageSet.add(message);
     }
 }
