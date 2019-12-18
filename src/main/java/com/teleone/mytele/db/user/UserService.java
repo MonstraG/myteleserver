@@ -20,7 +20,6 @@ public class UserService {
 
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(Role.ADMIN);
         userRepository.save(user);
     }
 
