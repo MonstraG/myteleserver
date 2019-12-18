@@ -26,11 +26,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/users/create/**").permitAll()
+                .antMatchers("/resources/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .permitAll()
+                .permitAll().defaultSuccessUrl("/")
                 .and()
                 .logout()
                 .permitAll();

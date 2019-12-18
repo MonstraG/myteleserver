@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/messages/*")
+@RequestMapping("/api/messages/*")
 public class MessageController extends AbstractController {
 
     @Autowired

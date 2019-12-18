@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @Service
-@RequestMapping("/additional-services/*")
+@RequestMapping("/api/additional-services/*")
 public class AdditionalServicesController extends AbstractController {
 
     @Autowired

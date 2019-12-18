@@ -6,14 +6,19 @@ import com.teleone.mytele.db.tariff.TariffService;
 import com.teleone.mytele.db.ticket.TicketService;
 import com.teleone.mytele.db.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
 
 @Controller
 @RequestMapping("/*")
-public class HomeController {
+public class WebController {
 
     @Autowired
     private UserService userService;
@@ -31,12 +36,16 @@ public class HomeController {
     private AdditionalServicesService additionalServicesService;
 
     @RequestMapping("/")
-    public String what() {
-        return "tariffs.html";
+    public String home(ModelMap model) {
+        UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        HashMap<String, Long> stats = getStats();
+        model.addAttribute("userDetails", userDetails);
+        model.addAttribute("stats", stats);
+        return "home";
     }
 
     @RequestMapping("/stats")
-    public HashMap<String, Long> GetStats() {
+    public HashMap<String, Long> getStats() {
         HashMap<String, Long> response = new HashMap<>();
 
         response.put("users", userService.getUsersCount());
@@ -47,4 +56,16 @@ public class HomeController {
 
         return response;
     }
+
+    @GetMapping("/login")
+    public String login(Model model, String error, String logout) {
+        if (error != null)
+            model.addAttribute("error", "Your username and password is invalid.");
+
+        if (logout != null)
+            model.addAttribute("message", "You have been logged out successfully.");
+
+        return "login";
+    }
+
 }

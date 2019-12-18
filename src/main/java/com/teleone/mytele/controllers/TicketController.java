@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/tickets/*")
+@RequestMapping("/api/tickets/*")
 public class TicketController extends AbstractController {
 
     @Autowired
