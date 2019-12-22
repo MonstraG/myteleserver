@@ -39,7 +39,9 @@ public class ThymeleafConfig implements WebMvcConfigurer, ApplicationContextAwar
 
     private ITemplateResolver jspTemplateResolver() {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-        resolver.setApplicationContext(applicationContext);
+        try {
+            resolver.setApplicationContext(applicationContext);
+        } catch (Exception ignored) {}
         resolver.setPrefix("/");
         resolver.setSuffix(".jsp");
         resolver.setTemplateMode(TemplateMode.HTML);
