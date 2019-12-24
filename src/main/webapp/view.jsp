@@ -6,20 +6,28 @@
   <article class=".col-9" style="padding: 40px;">
     <h4 th:text="${ticket.topic}"></h4>
     <h5 th:if="${hasMod}">Назначенный сотрудник: <span th:text="${moderator.username}"></span></h5>
+    <h5 style="padding-top: 15px" th:if="${!hasMod}">Сотрудник еще не назначен</h5>
+    
+    <h5 style="padding-top: 15px">Сообщения:</h5>
 
-    <a th:href="@{'/tickets/close/' + ${ticket.id}}" th:if=${ticket.open}>
-      <button class="btn btn-primary">Закрыть</button>
-    </a>
+    <th:block th:each="message: ${ticket.messageSet}">
+      <span th:text="${names.get(message.author)}"></span>:
+      <p th:text="${message.text}"></p>
+      <hr>
+    </th:block>
 
-    <a th:href="@{'/tickets/open/' + ${ticket.id}}" th:if=${!ticket.open}>
-      <button class="btn btn-primary">Открыть</button>
-    </a>
+    <div style="display: flex; flex-direction: row; justify-content: start;">
+      <a th:href="@{'/tickets/addMessage/' + ${ticket.id}}">
+        <button class="btn btn-primary">Ответить</button>
+      </a>
 
-    <div th:each="row: ${messages}">
-      <span></span>:
-      <p>
+      <a th:href="@{'/tickets/close/' + ${ticket.id}}" th:if=${ticket.open}>
+        <button class="btn btn-secondary">Закрыть</button>
+      </a>
 
-      </p>
+      <a th:href="@{'/tickets/open/' + ${ticket.id}}" th:if=${!ticket.open}>
+        <button class="btn btn-secondary">Открыть</button>
+      </a>
     </div>
   </article>
 </div>

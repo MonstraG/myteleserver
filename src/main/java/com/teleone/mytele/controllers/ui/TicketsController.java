@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,19 +42,26 @@ public class TicketsController {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("userDetails", userDetails);
 
+        HashMap<Long, String> names = new HashMap<>();
+
         User user = userService.find(userDetails.getUsername());
         Optional<Ticket> ticket = ticketService.find(id);
         if (!ticket.isPresent()) {
             return "/error";
         }
+        names.put(user.getId(), user.getUsername());
 
         Optional<User> moderator = userService.find(ticket.get().getModerator());
-        moderator.ifPresent(value -> model.addAttribute("moderator", value));
+        moderator.ifPresent(moder -> {
+            names.put(moder.getId(), moder.getUsername());
+            model.addAttribute("moderator", moder);
+        });
 
         model.addAttribute("hasMod", moderator.isPresent());
-
         model.addAttribute("ticket", ticket.get());
         model.addAttribute("user", user);
+        model.addAttribute("names", names);
+
         return "/tickets/view";
     }
 
