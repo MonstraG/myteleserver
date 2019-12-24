@@ -1,12 +1,11 @@
 package com.teleone.mytele.db.tariff;
 
-import com.teleone.mytele.db.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class TariffService {
@@ -51,8 +50,8 @@ public class TariffService {
         return tariffRepository.count();
     }
 
-    public Set<Tariff> getTariffs() {
-        HashSet<Tariff> set = new HashSet<>();
+    public List<Tariff> getTariffs() {
+        ArrayList<Tariff> set = new ArrayList<>();
         tariffRepository.findAll().forEach(set::add);
         return set;
     }

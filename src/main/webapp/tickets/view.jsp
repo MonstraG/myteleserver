@@ -10,7 +10,7 @@
   <div th:insert="~{nav::navbar}"></div>
   <main class="row" style="height: 100vh; width: 100vw">
     <div th:insert="~{nav::aside}"></div>
-    <div th:insert="~{add::viewTicket}"></div>
+    <div th:insert="~{view::viewTicket}"></div>
   </main>
 </div>
 </body>

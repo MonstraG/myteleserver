@@ -47,7 +47,7 @@
       </div>
       <div class="form-group">
         <label for="description">Описание</label>
-        <input type="number" class="form-control" id="description" th:field="*{description}">
+        <input type="text" class="form-control" id="description" th:field="*{description}">
       </div>
       <button type="submit" class="btn btn-primary">Добавить</button>
     </form>
@@ -56,10 +56,14 @@
 
 <div th:fragment="addTicket">
   <div style="padding: 20px 40px;">
-    <form action="#" th:action="@{/tickets/create}" th:object="${message}" method="post">
+    <form action="#" th:action="@{/tickets/create}" th:object="${ticket}" method="post">
       <div class="form-group">
-        <label for="text">Текст заявки</label>
-        <textarea class="form-control" id="text" th:field="*{text}"></textarea>
+        <label for="topic">Тема заявки</label>
+        <input class="form-control" id="topic" th:field="*{topic}">
+      </div>
+      <div class="form-group" th:object="${message}">
+        <label for="message">Текст заявки</label>
+        <textarea class="form-control" id="message" th:field="*{text}"></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Создать</button>
     </form>

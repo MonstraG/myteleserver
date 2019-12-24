@@ -4,9 +4,9 @@ import com.teleone.mytele.db.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class TicketService {
@@ -21,7 +21,7 @@ public class TicketService {
         return ticketRepository.existsById(id);
     }
 
-    private boolean save(Ticket ticket) {
+    public boolean save(Ticket ticket) {
         ticketRepository.save(ticket);
         return true;
     }
@@ -44,13 +44,6 @@ public class TicketService {
         return false;
     }
 
-    public boolean create(Ticket ticket, User user) {
-        if (!user.isEmployee()) {
-            return save(ticket);
-        }
-        return false;
-    }
-
     public boolean assignModerator(Long id, User moderator) {
         Optional<Ticket> ticket = find(id);
         if (ticket.isPresent() && (moderator.isEmployee())) {
@@ -64,7 +57,7 @@ public class TicketService {
         return ticketRepository.count();
     }
 
-    public Set<Ticket> getTickets(User user) {
+    public List<Ticket> getTickets(User user) {
         String role = user.getRole().name();
         if (role.equals("USER")) {
             return ticketRepository.findByAuthor(user.getId());
@@ -72,7 +65,9 @@ public class TicketService {
         if (role.equals("MOD")) {
             return ticketRepository.findByModerator(user.getId());
         }
-        HashSet<Ticket> set = new HashSet<>();
+
+        //all tickets
+        ArrayList<Ticket> set = new ArrayList<>();
         ticketRepository.findAll().forEach(set::add);
         return set;
     }

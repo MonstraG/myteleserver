@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.Set;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/tariffs/*")
@@ -18,7 +21,7 @@ public class TariffController extends AbstractController {
     private TariffService tariffsService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<Set<Tariff>> getAdditionalServices() {
+    public ResponseEntity<List<Tariff>> getAdditionalServices() {
         return new ResponseEntity<>(tariffsService.getTariffs(), HttpStatus.OK);
     }
 

@@ -45,7 +45,7 @@ public class TicketController extends AbstractController {
         ticket.setOpenStatus(true);
         ticket.setAuthor(userId);
 
-        return booleanResponse(ticketService.create(ticket, user.get()));
+        return booleanResponse(ticketService.save(ticket));
     }
 
     @RequestMapping(value = "/{ticketId}/assign", method = RequestMethod.POST)

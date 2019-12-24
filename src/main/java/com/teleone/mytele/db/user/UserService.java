@@ -1,13 +1,12 @@
 package com.teleone.mytele.db.user;
 
-import com.teleone.mytele.db.role.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserService {
@@ -28,6 +27,9 @@ public class UserService {
     }
 
     public Optional<User> find(Long id) {
+        if (id == null) {
+            return Optional.empty();
+        }
         return userRepository.findById(id);
     }
 
@@ -39,8 +41,8 @@ public class UserService {
         return userRepository.existsById(id);
     }
 
-    public Set<User> getUsers() {
-        HashSet<User> set = new HashSet<>();
+    public List<User> getUsers() {
+        ArrayList<User> set = new ArrayList<>();
         userRepository.findAll().forEach(set::add);
         return set;
     }

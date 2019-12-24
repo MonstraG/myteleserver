@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.HashMap;
-import java.util.Set;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/users/*")
@@ -48,14 +48,14 @@ public class UserController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<HashMap<String, Object>> getUsers() {
         HashMap<String, Object> response = new HashMap<>();
-        Set<User> users = userService.getUsers();
+        List<User> users = userService.getUsers();
         response.put("users", users);
         response.put("count", users.size());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{userId}/tickets", method = RequestMethod.GET)
-    public ResponseEntity<Set<Ticket>> getTickets(@PathVariable Long userId) {
+    public ResponseEntity<List<Ticket>> getTickets(@PathVariable Long userId) {
         return userService.find(userId)
                 .map(user -> new ResponseEntity<>(ticketService.getTickets(user), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));

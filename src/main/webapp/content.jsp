@@ -34,6 +34,7 @@
           <th scope="col">Минут в месяц</th>
           <th scope="col">СМС в месяц</th>
           <th scope="col">ГБ в месяц</th>
+          <th scope="col">Удаление</th>
         </tr>
         </thead>
         <tbody>
@@ -45,6 +46,7 @@
           <td th:each="field: ${row}" th:text="${field.minutes}" />
           <td th:each="field: ${row}" th:text="${field.sms}" />
           <td th:each="field: ${row}" th:text="${field.internet}" />
+          <td th:each="field: ${row}"><a th:href="@{'/tariffs/delete/' + ${field.id}}">Удалить</a></td>
         </tr>
         </tbody>
       </table>
@@ -65,6 +67,7 @@
           <th scope="col">Название</th>
           <th scope="col">Ежемесячная цена</th>
           <th scope="col">Описание</th>
+          <th scope="col">Удаление</th>
         </tr>
         </thead>
         <tbody>
@@ -73,6 +76,7 @@
           <td th:each="field: ${row}" th:text="${field.name}" />
           <td th:each="field: ${row}" th:text="${field.price}" />
           <td th:each="field: ${row}" th:text="${field.description}" />
+          <td th:each="field: ${row}"><a th:href="@{'/services/delete/' + ${field.id}}">Удалить</a></td>
         </tr>
         </tbody>
       </table>
@@ -90,16 +94,16 @@
       <table class="table">
         <thead>
         <tr>
-          <th scope="col">ID</th>
+          <th scope="col">Тема</th>
           <th scope="col">Автор</th>
           <th scope="col">Модератор</th>
-          <th scope="col">Статус</th>
+          <th scope="col">Открыт</th>
         </tr>
         </thead>
         <tbody>
         <tr class="even pointer" th:each="row: ${tickets}" id="tablerow">
           </th>
-          <td th:each="field: ${row}" th:text="${field.id}" />
+          <td th:each="field: ${row}"><a th:href="@{'/tickets/' + ${field.id}}" th:text="${field.topic}"></a></td>
           <td th:each="field: ${row}" th:text="${field.author}" />
           <td th:each="field: ${row}" th:text="${field.moderator}" />
           <td th:each="field: ${row}" th:text="${field.open}" />

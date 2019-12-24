@@ -12,7 +12,7 @@ public class Message {
     private Long author;
     private String text;
 
-    @ManyToOne
+    @ManyToOne()
     private Ticket ticket;
 
     public Message() {

@@ -3,9 +3,9 @@ package com.teleone.mytele.db.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class AdditionalServicesService {
@@ -43,8 +43,8 @@ public class AdditionalServicesService {
         return true;
     }
 
-    public Set<AdditionalService> getAdditionalServices() {
-        HashSet<AdditionalService> set = new HashSet<>();
+    public List<AdditionalService> getAdditionalServices() {
+        ArrayList<AdditionalService> set = new ArrayList<>();
         additionalServicesRepository.findAll().forEach(set::add);
         return set;
     }

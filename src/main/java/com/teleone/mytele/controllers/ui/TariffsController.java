@@ -7,12 +7,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Controller
 @RequestMapping("/tariffs/*")
@@ -25,7 +22,7 @@ public class TariffsController {
     public String tariffs(ModelMap model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("userDetails", userDetails);
-        Set<Tariff> tariffs = tariffsService.getTariffs();
+        List<Tariff> tariffs = tariffsService.getTariffs();
         model.addAttribute("tariffs", tariffs);
         model.addAttribute("hasContent", tariffs.size() > 0);
         return "/tariffs/list";
@@ -42,6 +39,12 @@ public class TariffsController {
     @PostMapping("/create")
     public String save(ModelMap model, @ModelAttribute Tariff tariff) {
         tariffsService.create(tariff);
+        return tariffs(model);
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(ModelMap model, @PathVariable Long id) {
+        tariffsService.remove(id);
         return tariffs(model);
     }
 }

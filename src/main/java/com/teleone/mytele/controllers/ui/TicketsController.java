@@ -10,13 +10,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/tickets/*")
@@ -33,31 +30,29 @@ public class TicketsController {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("userDetails", userDetails);
         User user = userService.find(userDetails.getUsername());
-        Set<Ticket> tickets = ticketService.getTickets(user);
+        List<Ticket> tickets = ticketService.getTickets(user);
         model.addAttribute("tickets", tickets);
         model.addAttribute("hasContent", tickets.size() > 0);
         return "/tickets/list";
     }
 
-    @GetMapping("/view")
-    public String ticket(ModelMap model, Long ticketId) {
+    @GetMapping("/{id}")
+    public String ticket(ModelMap model, @PathVariable Long id) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("userDetails", userDetails);
 
         User user = userService.find(userDetails.getUsername());
-        Optional<Ticket> ticket = ticketService.find(ticketId);
+        Optional<Ticket> ticket = ticketService.find(id);
         if (!ticket.isPresent()) {
             return "/error";
         }
 
         Optional<User> moderator = userService.find(ticket.get().getModerator());
-        if (moderator.isPresent()) {
-            model.addAttribute("mod", moderator);
-        }
+        moderator.ifPresent(value -> model.addAttribute("moderator", value));
 
         model.addAttribute("hasMod", moderator.isPresent());
 
-        model.addAttribute("ticket", ticket);
+        model.addAttribute("ticket", ticket.get());
         model.addAttribute("user", user);
         return "/tickets/view";
     }
@@ -66,18 +61,32 @@ public class TicketsController {
     public String add(ModelMap model) {
         UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("userDetails", userDetails);
+        model.addAttribute("ticket", new Ticket());
         model.addAttribute("message", new Message());
         return "/tickets/add";
     }
 
     @PostMapping("/create")
-    public String save(ModelMap model, @ModelAttribute Message message) {
+    public String save(ModelMap model, @ModelAttribute Ticket ticket, @ModelAttribute Message message) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.find(userDetails.getUsername());
-        Ticket ticket = new Ticket();
+        message.setAuthor(user.getId());
         ticket.setAuthor(user.getId());
         ticket.addMessage(message);
-        ticketService.create(ticket, user);
+        ticket.setOpenStatus(true);
+        ticketService.save(ticket);
         return tickets(model);
+    }
+
+    @GetMapping("/close/{id}")
+    public String close(ModelMap model, @PathVariable Long id) {
+        ticketService.closeTicket(id);
+        return ticket(model, id);
+    }
+
+    @GetMapping("/open/{id}")
+    public String open(ModelMap model, @PathVariable Long id) {
+        ticketService.openTicket(id);
+        return ticket(model, id);
     }
 }

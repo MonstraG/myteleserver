@@ -3,8 +3,8 @@ package com.teleone.mytele.db.ticket;
 import com.teleone.mytele.db.message.Message;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Ticket {
@@ -13,10 +13,12 @@ public class Ticket {
     private Long id;
     private Long author;
     private Long moderator;
+    private String topic;
     private Boolean open;
 
-    @OneToMany(mappedBy = "id")
-    private Set<Message> messageSet;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "messageId" )
+    private List<Message> messageSet;
 
     public Ticket() {
     }
@@ -59,8 +61,20 @@ public class Ticket {
 
     public void addMessage(Message message) {
         if (this.messageSet == null) {
-            this.messageSet = new HashSet<>();
+            this.messageSet = new ArrayList<>();
         }
         this.messageSet.add(message);
+    }
+
+    public List<Message> getMessageSet() {
+        return messageSet;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 }
