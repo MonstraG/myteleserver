@@ -70,5 +70,17 @@
   </div>
 </div>
 
+<div th:fragment="addMessage">
+  <div style="padding: 20px 40px;">
+    <form action="#" th:action="@{'/tickets/' + ${ticketId} + '/addMessage'}" th:object="${newMessage}" method="post">
+      <div class="form-group">
+        <label for="message">Текст сообщения</label>
+        <textarea class="form-control" id="message" th:field="*{text}"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Послать</button>
+    </form>
+  </div>
+</div>
+
 </body>
 </html>

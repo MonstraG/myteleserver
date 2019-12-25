@@ -20,7 +20,7 @@ public class MessageService {
         return messageRepository.count();
     }
 
-    private boolean save(Message message) {
+    public boolean save(Message message) {
         messageRepository.save(message);
         return true;
     }

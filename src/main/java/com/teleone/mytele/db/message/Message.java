@@ -8,11 +8,13 @@ import javax.persistence.*;
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="message_id")
     private Long id;
     private Long author;
     private String text;
 
     @ManyToOne()
+    @JoinColumn(name="ticket_id", nullable=false)
     private Ticket ticket;
 
     public Message() {
@@ -43,4 +45,11 @@ public class Message {
     }
 
 
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
 }

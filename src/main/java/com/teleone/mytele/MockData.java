@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -49,7 +48,6 @@ public class MockData implements ApplicationListener<ApplicationReadyEvent> {
                 new User("alex", "123", USER),
                 new User("admin", "12345", ADMIN)
         ).forEach(user -> userService.save(user));
-
 
         Arrays.asList(
                 new Tariff("Мой Онлайн", 250, 50, 450, 50, 15),
