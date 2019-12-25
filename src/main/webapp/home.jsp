@@ -6,12 +6,11 @@
   <title>MyTeleОдин</title>
 </head>
 <body>
-<div class="container-fluid" style="height: 100vh; overflow: hidden">
+<div class="container-fluid" style="min-height: 100vh; display: flex; flex-direction: column;">
   <div th:insert="~{nav::navbar}"></div>
-  <main class="row">
-    <div th:insert="~{nav::aside}"></div>
+  <main class="row" style="display: flex; flex-direction: row; align-items: stretch; flex-grow: 1">
+    <div style="display: flex;" th:insert="~{nav::aside}"></div>
     <div th:insert="~{content::home}"></div>
   </main>
 </div>
 </body>
-</html>
