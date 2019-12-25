@@ -3,6 +3,8 @@
 <body>
 
 <div th:fragment="viewTicket">
+  <a href="/tickets/list" style="margin: 15px">< Назад</a>
+  <hr>
   <article class=".col-9" style="padding: 40px;">
     <h4 th:text="${ticket.topic}"></h4>
     <h5 th:if="${hasMod}">Назначенный сотрудник: <span th:text="${moderator.username}"></span></h5>

@@ -3,6 +3,8 @@
 <body>
 
 <div th:fragment="addTariff">
+  <a href="/tariffs/list" style="margin: 15px">< Назад</a>
+  <hr>
   <div style="padding: 20px 40px;">
     <form action="#" th:action="@{/tariffs/create}" th:object="${tariff}" method="post">
       <div class="form-group">
@@ -35,6 +37,8 @@
 </div>
 
 <div th:fragment="addService">
+  <a href="/services/list" style="margin: 15px">< Назад</a>
+  <hr>
   <div style="padding: 20px 40px;">
     <form action="#" th:action="@{/services/create}" th:object="${service}" method="post">
       <div class="form-group">
@@ -55,6 +59,8 @@
 </div>
 
 <div th:fragment="addTicket">
+  <a href="/tickets/list" style="margin: 15px">< Назад</a>
+  <hr>
   <div style="padding: 20px 40px;">
     <form action="#" th:action="@{/tickets/create}" th:object="${ticket}" method="post">
       <div class="form-group">
@@ -71,6 +77,8 @@
 </div>
 
 <div th:fragment="addMessage">
+  <a href="/tickets/list" style="margin: 15px">< Назад</a>
+  <hr>
   <div style="padding: 20px 40px;">
     <form action="#" th:action="@{'/tickets/' + ${ticketId} + '/addMessage'}" th:object="${newMessage}" method="post">
       <div class="form-group">
@@ -83,6 +91,8 @@
 </div>
 
 <div th:fragment="addUser">
+  <a href="/users/list" style="margin: 15px">< Назад</a>
+  <hr>
   <div style="padding: 20px 40px;">
     <form action="#" th:action="@{/users/create}" th:object="${user}" method="post">
       <div class="form-group">
