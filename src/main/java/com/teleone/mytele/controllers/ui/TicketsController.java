@@ -1,6 +1,7 @@
 package com.teleone.mytele.controllers.ui;
 
 import com.teleone.mytele.db.message.Message;
+import com.teleone.mytele.db.message.MessageService;
 import com.teleone.mytele.db.ticket.Ticket;
 import com.teleone.mytele.db.ticket.TicketService;
 import com.teleone.mytele.db.user.User;
@@ -21,10 +22,14 @@ import java.util.Optional;
 public class TicketsController {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private TicketService ticketService;
 
     @Autowired
-    private UserService userService;
+    private MessageService messageService;
+
 
     @GetMapping("/list")
     public String tickets(ModelMap model) {
@@ -57,6 +62,12 @@ public class TicketsController {
             model.addAttribute("moderator", moder);
         });
 
+        Optional<User> author = userService.find(ticket.get().getAuthor());
+        if (!author.isPresent()) {
+            return "/error";
+        }
+        names.put(author.get().getId(), author.get().getUsername());
+
         model.addAttribute("hasMod", moderator.isPresent());
         model.addAttribute("ticket", ticket.get());
         model.addAttribute("user", user);
@@ -83,6 +94,9 @@ public class TicketsController {
         ticket.addMessage(message);
         ticket.setOpenStatus(true);
         ticketService.save(ticket);
+
+        message.setTicket(ticket);
+        messageService.save(message);
         return tickets(model);
     }
 
@@ -96,5 +110,34 @@ public class TicketsController {
     public String open(ModelMap model, @PathVariable Long id) {
         ticketService.openTicket(id);
         return ticket(model, id);
+    }
+
+    @GetMapping("/{id}/addMessage")
+    public String addMessage(ModelMap model, @PathVariable Long id) {
+        UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("ticketId", id);
+        model.addAttribute("userDetails", userDetails);
+        model.addAttribute("newMessage", new Message());
+        return "/tickets/addMessage";
+    }
+
+    @PostMapping("/{ticketId}/addMessage")
+    public String saveMessage(ModelMap model, @PathVariable Long ticketId, @ModelAttribute Message newMessage) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.find(userDetails.getUsername());
+        newMessage.setAuthor(user.getId());
+        Optional<Ticket> optionalTicket = ticketService.find(ticketId);
+        if (!optionalTicket.isPresent()) {
+            return "/error";
+        }
+
+        Ticket ticket = optionalTicket.get();
+
+        ticket.addMessage(newMessage);
+        ticketService.save(ticket);
+
+        newMessage.setTicket(ticket);
+        messageService.save(newMessage);
+        return ticket(model, ticketId);
     }
 }

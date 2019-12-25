@@ -16,9 +16,8 @@ public class Ticket {
     private String topic;
     private Boolean open;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "messageId" )
-    private List<Message> messageSet;
+    @OneToMany(mappedBy = "ticket")
+    private List<Message> MessageList;
 
     public Ticket() {
     }
@@ -60,14 +59,14 @@ public class Ticket {
     }
 
     public void addMessage(Message message) {
-        if (this.messageSet == null) {
-            this.messageSet = new ArrayList<>();
+        if (this.MessageList == null) {
+            this.MessageList = new ArrayList<>();
         }
-        this.messageSet.add(message);
+        this.MessageList.add(message);
     }
 
-    public List<Message> getMessageSet() {
-        return messageSet;
+    public List<Message> getMessageList() {
+        return MessageList;
     }
 
     public String getTopic() {

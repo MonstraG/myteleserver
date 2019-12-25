@@ -70,5 +70,33 @@
   </div>
 </div>
 
+<div th:fragment="addMessage">
+  <div style="padding: 20px 40px;">
+    <form action="#" th:action="@{'/tickets/' + ${ticketId} + '/addMessage'}" th:object="${newMessage}" method="post">
+      <div class="form-group">
+        <label for="message">Текст сообщения</label>
+        <textarea class="form-control" id="message" th:field="*{text}"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Послать</button>
+    </form>
+  </div>
+</div>
+
+<div th:fragment="addUser">
+  <div style="padding: 20px 40px;">
+    <form action="#" th:action="@{/users/create}" th:object="${user}" method="post">
+      <div class="form-group">
+        <label for="username">Логин</label>
+        <input class="form-control" id="username" th:field="*{username}">
+      </div>
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input class="form-control" id="password" th:field="*{password}">
+      </div>
+      <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
+  </div>
+</div>
+
 </body>
 </html>
