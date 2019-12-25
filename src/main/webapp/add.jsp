@@ -82,5 +82,21 @@
   </div>
 </div>
 
+<div th:fragment="addUser">
+  <div style="padding: 20px 40px;">
+    <form action="#" th:action="@{/users/create}" th:object="${user}" method="post">
+      <div class="form-group">
+        <label for="username">Логин</label>
+        <input class="form-control" id="username" th:field="*{username}">
+      </div>
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input class="form-control" id="password" th:field="*{password}">
+      </div>
+      <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
+  </div>
+</div>
+
 </body>
 </html>

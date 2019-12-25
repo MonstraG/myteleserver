@@ -62,6 +62,12 @@ public class TicketsController {
             model.addAttribute("moderator", moder);
         });
 
+        Optional<User> author = userService.find(ticket.get().getAuthor());
+        if (!author.isPresent()) {
+            return "/error";
+        }
+        names.put(author.get().getId(), author.get().getUsername());
+
         model.addAttribute("hasMod", moderator.isPresent());
         model.addAttribute("ticket", ticket.get());
         model.addAttribute("user", user);

@@ -22,6 +22,10 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void remove(Long id) {
+        userRepository.deleteById(id);
+    }
+
     public User find(String username) {
         return userRepository.findByUsername(username);
     }

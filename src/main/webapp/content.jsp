@@ -112,7 +112,34 @@
       </table>
     </div>
 
-    <a href="/tickets/add" th:if=${!userDetails.authorities.stream().findFirst().get().getAuthority().equals("USER")}><button class="btn btn-primary">Создать заявку</button></a>
+    <a href="/tickets/add"><button class="btn btn-primary">Создать заявку</button></a>
+  </article>
+</div>
+
+
+<div th:fragment="usersTable">
+  <article class=".col-9" style="padding: 40px;">
+    <h4>Заявки</h4>
+    <h5 th:if=${!hasContent}>Пользователей нет (а как тогда ты это смотришь, чувак?)</h5>
+    <div th:if=${hasContent}>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Логин</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="even pointer" th:each="row: ${users}" id="tablerow">
+          </th>
+          <td th:each="field: ${row}" th:text="${field.id}"></td>
+          <td th:each="field: ${row}" th:text="${field.username}" />
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <a href="/users/add"><button class="btn btn-primary">Создать пользователя</button></a>
   </article>
 </div>
 
