@@ -18,7 +18,7 @@
 </div>
 
 <div th:fragment="aside">
-  <aside class=".col-3" style="background-color: lightblue; padding-right: 25px; height: 100vh;">
+  <aside class=".col-3" style="background-color: lightblue; padding-right: 25px; height: 100%">
     <ul style="list-style: none; padding-top: 20px;">
       <li><a href="/">Главная</a></li>
       <li><a href="/tariffs/list">Тарифы</a></li>
